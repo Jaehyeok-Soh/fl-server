@@ -31,7 +31,7 @@ void PacketManager::Init(const UINT32 maxClient_)
 	mRecvFunctionDictionary[PACKET_ID::ROOM_ENTER_REQUEST] = &PacketManager::ProcessEnterRoom;
 	mRecvFunctionDictionary[PACKET_ID::ROOM_LEAVE_REQUEST] = &PacketManager::ProcessLeaveRoom;
 	mRecvFunctionDictionary[PACKET_ID::ROOM_CHAT_REQUEST] = &PacketManager::ProcessRoomChatMessage;
-	
+
 	mRecvFunctionDictionary[PACKET_ID::CHARACTER_SYNC] = &PacketManager::ProcessCharacterSync;
 
 	CreateComponent(maxClient_);
@@ -105,11 +105,9 @@ PacketInfo PacketManager::DequePacketData()
 {
 	UINT32 userIndex = 0;
 
-	{
-		lock_guard<mutex> guard(mLock);
-		if (mInComingPacketUserIndex.empty())
-			return PacketInfo();
-	}
+	lock_guard<mutex> guard(mLock);
+	if (mInComingPacketUserIndex.empty())
+		return PacketInfo();
 
 	userIndex = mInComingPacketUserIndex.front();
 	mInComingPacketUserIndex.pop_front();
@@ -143,6 +141,16 @@ void PacketManager::ProcessPacket()
 		{
 			isIdle = false;
 			ProcessRecvPacket(packetData.ClientIndex, packetData.PacketId, packetData.DataSize, packetData.pDataPtr);
+
+			auto pUser = mUserManager->GetUserByConnIdx(packetData.ClientIndex);
+			while (true)
+			{
+				auto nextPacket = pUser->GetPacket();
+				if (nextPacket.PacketId <= PACKET_ID::SYS_END)
+					break;
+
+				ProcessRecvPacket(packetData.ClientIndex, nextPacket.PacketId, nextPacket.DataSize, nextPacket.pDataPtr);
+			}
 		}
 
 		if (auto packetData = DequeSystemPacketData(); packetData.PacketId != 0)
@@ -312,7 +320,7 @@ void PacketManager::ProcessCharacterSync(UINT32 clientIndex_, UINT16 packetSize_
 	characterSyncBroadCastPacket = *pCharacterSyncPacket;
 	characterSyncBroadCastPacket.PacketLength = sizeof(CHARACTER_SYNC_PACKET);
 	characterSyncBroadCastPacket.PacketId = PACKET_ID::CHARACTER_SYNC_BROADCAST;
-	
+
 	auto now = chrono::steady_clock::now().time_since_epoch();
 	characterSyncBroadCastPacket.TimeStamp = static_cast<UINT32>(chrono::duration_cast<chrono::milliseconds>(now).count());
 

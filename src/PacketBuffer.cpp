@@ -17,6 +17,11 @@ void PacketBuffer::Clear()
 
 void PacketBuffer::SetPacketData(const UINT32 dataSize_, shared_ptr<char[]> pData_)
 {
+	if (dataSize_ > PACKET_DATA_BUFFER_SIZE)
+	{
+		spdlog::error("[CRITICAL] Incoming data size ({}) is larger then total buffer size ({})", dataSize_, PACKET_DATA_BUFFER_SIZE);
+	}
+
 	if ((mPacketDataBufferWPos + dataSize_) >= PACKET_DATA_BUFFER_SIZE)
 	{
 		auto remainDataSize = mPacketDataBufferWPos - mPacketDataBufferRPos;
@@ -32,6 +37,12 @@ void PacketBuffer::SetPacketData(const UINT32 dataSize_, shared_ptr<char[]> pDat
 		}
 
 		mPacketDataBufferRPos = { 0 };
+
+		if ((mPacketDataBufferWPos + dataSize_) >= PACKET_DATA_BUFFER_SIZE)
+		{
+			spdlog::error("[ERROR] Buffer overflow detected after compaction, WPos: {}, Incoming Size: {}", mPacketDataBufferWPos, dataSize_);
+			return;
+		}
 	}
 
 	CopyMemory(GetPtr(mPacketDataBufferWPos), pData_.get(), dataSize_);
