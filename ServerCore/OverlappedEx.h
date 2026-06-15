@@ -1,5 +1,5 @@
 #pragma once
-#include "IOOperation.h"
+#include "Enum_IOOperation.h"
 
 struct stOverlappedEx
 {

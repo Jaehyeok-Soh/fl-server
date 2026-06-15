@@ -1,10 +1,12 @@
 #include "pch.h"
 
-#include "ChatServer.h"
+#include "GameServerService.h"
 
-ChatServer::~ChatServer() = default;
+GameServerService::~GameServerService()
+{
+}
 
-void ChatServer::Run(const UINT32 maxClient)
+void GameServerService::Run(const UINT32 maxClient)
 {
 	auto sendPacketFunc = [&](UINT32 clientIndex_, UINT16 packetSize, shared_ptr<char[]> pSendPacket)
 		{
@@ -19,14 +21,14 @@ void ChatServer::Run(const UINT32 maxClient)
 	StartServer(maxClient);
 }
 
-void ChatServer::End()
+void GameServerService::End()
 {
 	m_pPacketManager->End();
 
 	DestroyThread();
 }
 
-void ChatServer::OnConnect(const UINT32 clientIndex_)
+void GameServerService::OnConnect(const UINT32 clientIndex_)
 {
 	spdlog::info("[OnConnect] client : index({})\n", clientIndex_);
 
@@ -37,7 +39,7 @@ void ChatServer::OnConnect(const UINT32 clientIndex_)
 	m_pPacketManager->PushSystemPacket(packet);
 }
 
-void ChatServer::OnClose(const UINT32 clientIndex_)
+void GameServerService::OnClose(const UINT32 clientIndex_)
 {
 	spdlog::info("[OnClose] client : index({})\n", clientIndex_);
 
@@ -45,9 +47,9 @@ void ChatServer::OnClose(const UINT32 clientIndex_)
 	m_pPacketManager->PushSystemPacket(packet);
 }
 
-void ChatServer::OnReceive(const UINT32 clientIndex_, const UINT32 size_, shared_ptr<char[]> pData_)
+void GameServerService::OnReceive(const UINT32 clientIndex_, const UINT32 size_, shared_ptr<char[]> pData_)
 {
-	spdlog::info("[OnReceive] client : index ({}), dataSize({})\n", clientIndex_, size_);
+	spdlog::info("[OnReceive] client : index({}), dataSize({})\n", clientIndex_, size_);
 
 	m_pPacketManager->ReceivePacketData(clientIndex_, size_, pData_);
 }

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{54f969fc-cc46-4483-96d4-6e02d87654d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{defec27f-dc3a-4bff-ae90-2c1fabd80f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{ef1ce6b4-768f-49fa-b9e4-0e7a27b170c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectModel">
+      <UniqueIdentifier>{369c67c4-afe5-42ca-bd0d-62b25b6848f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Service">
+      <UniqueIdentifier>{a9a7f48b-90c2-469e-aaa8-8d177aa1737a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectModel\Packet">
+      <UniqueIdentifier>{79eae9f7-02a4-4aea-bdaa-fbec36f8c468}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameServer.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="GameServerService.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>ObjectModel</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>ObjectModel</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UserManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="UserManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>ObjectModel</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>ObjectModel</Filter>
+    </ClInclude>
+    <ClInclude Include="GameServerService.h">
+      <Filter>Service</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet_GamesServer.h">
+      <Filter>ObjectModel\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet_Room.h">
+      <Filter>ObjectModel\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet_RoomChat.h">
+      <Filter>ObjectModel\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet_CharacterSync.h">
+      <Filter>ObjectModel\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet_Login.h">
+      <Filter>ObjectModel\Packet</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

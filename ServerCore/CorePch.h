@@ -42,9 +42,17 @@
 #include <variant>
 #include <iostream>
 #include <memory>
+#include <stack>
+#include <set>
 
 using namespace std;
 
 #include "Server_Defines.h"
 #include "Define.h"
 #include "Enums.h"
+
+#include "Types.h"
+
+void ServerCore();
+
+

@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{5dcd9181-1495-47f1-b850-c0b006a5f36a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{72891c54-a39c-4a81-af86-f6363257b80b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Default">
+      <UniqueIdentifier>{5eaaebbf-f79a-4288-aff3-142914ccbbdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Enums">
+      <UniqueIdentifier>{3af5a45f-cba8-4021-b382-02c222cdc761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{a01d63ef-7713-45f7-89e3-5030a640c25e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\Buffers">
+      <UniqueIdentifier>{f5e8ce08-06d3-4f20-b3ef-031549460bca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\Buffers\PacketBuffer">
+      <UniqueIdentifier>{1cf7c463-e31d-4d16-b145-1e26e3824967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\ClientInfo">
+      <UniqueIdentifier>{14ec323e-cf9f-4520-b024-8ef3d3857e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\OverlappedEx">
+      <UniqueIdentifier>{f344fd38-ec16-4b64-a682-f45fe6161f54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\ObejctModels">
+      <UniqueIdentifier>{8043d92f-b81c-4f97-8032-6bd6c4296d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\ObejctModels\Packet">
+      <UniqueIdentifier>{467685b1-ed53-4570-9e03-81aaada6feb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\ObejctModels\System">
+      <UniqueIdentifier>{2682eeaf-f76c-4752-ac0b-67ee9175d0d9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Types.h">
+      <Filter>Utils\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="CorePch.h">
+      <Filter>Utils\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Utils\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Server_Defines.h">
+      <Filter>Utils\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Server_Function.h">
+      <Filter>Utils\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum_DomainState.h">
+      <Filter>Utils\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>Utils\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum_ErrorCode.h">
+      <Filter>Utils\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum_IOOperation.h">
+      <Filter>Utils\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum_PacketId.h">
+      <Filter>Utils\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="IOCPServer.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketBuffer.h">
+      <Filter>Network\Buffers\PacketBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientInfo.h">
+      <Filter>Network\ClientInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="OverlappedEx.h">
+      <Filter>Network\OverlappedEx</Filter>
+    </ClInclude>
+    <ClInclude Include="Sys_ConnectResponsePacket.h">
+      <Filter>Network\ObejctModels\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>Utils\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet.h">
+      <Filter>Network\ObejctModels\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketHeader.h">
+      <Filter>Network\ObejctModels\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketInfo.h">
+      <Filter>Network\ObejctModels\Packet</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CorePch.cpp">
+      <Filter>Utils\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Utils\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="IOCPServer.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketBuffer.cpp">
+      <Filter>Network\Buffers\PacketBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Packet.cpp">
+      <Filter>Network\ObejctModels\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientInfo.cpp">
+      <Filter>Network\ClientInfo</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

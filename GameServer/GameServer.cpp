@@ -1,10 +1,11 @@
-﻿#include "pch.h"
-
-#include "ChatServer.h"
+#include "pch.h"
+#include <iostream>
+#include "CorePch.h"
+#include "GameServerService.h"
 
 int main()
 {
-	ChatServer server;
+	GameServerService server;
 
 	server.Init(MAX_IO_WORKER_THREAD);
 

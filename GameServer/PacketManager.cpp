@@ -10,7 +10,7 @@
 #include "RoomManager.h"
 #include "Room.h"
 
-#include "CharacterSyncPacket.h"
+#include "Packet_GamesServer.h"
 
 PacketManager::PacketManager() = default;
 

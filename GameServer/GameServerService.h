@@ -1,13 +1,12 @@
 #pragma once
-
 #include "PacketManager.h"
 #include "IOCPServer.h"
 
-class ChatServer : public IOCPServer
+class GameServerService : public IOCPServer
 {
 public:
-	ChatServer() = default;
-	~ChatServer();
+	GameServerService() = default;
+	~GameServerService();
 
 	void Run(const UINT32 maxClient);
 
@@ -20,4 +19,3 @@ public:
 private:
 	unique_ptr<PacketManager> m_pPacketManager;
 };
-

@@ -4,10 +4,6 @@
 
 #include "PacketInfo.h"
 
-#include "LoginPacket.h"
-#include "RoomPacket.h"
-#include "RoomChatPacket.h"
-
 struct PacketData
 {
 	UINT32 ClientIndex = { 0 };

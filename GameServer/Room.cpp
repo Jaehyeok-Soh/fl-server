@@ -3,7 +3,7 @@
 #include "Room.h"
 #include "User.h"
 
-#include "CharacterSyncPacket.h"
+#include "Packet_GamesServer.h"
 
 void Room::Init(const INT32 roomNum_, const INT32 maxUserCount_)
 {
