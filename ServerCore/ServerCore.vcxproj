@@ -162,11 +162,9 @@
     <ClInclude Include="ClientInfo.h" />
     <ClInclude Include="CorePch.h" />
     <ClInclude Include="Define.h" />
-    <ClInclude Include="Enum_DomainState.h" />
     <ClInclude Include="Enums.h" />
-    <ClInclude Include="Enum_ErrorCode.h" />
+    <ClInclude Include="Enum_CoreErrorCode.h" />
     <ClInclude Include="Enum_IOOperation.h" />
-    <ClInclude Include="Enum_PacketId.h" />
     <ClInclude Include="IOCPServer.h" />
     <ClInclude Include="OverlappedEx.h" />
     <ClInclude Include="Packet.h" />
@@ -178,7 +176,6 @@
     <ClInclude Include="Server_Function.h" />
     <ClInclude Include="Sys_ConnectResponsePacket.h" />
     <ClInclude Include="Types.h" />
-    <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClientInfo.cpp" />

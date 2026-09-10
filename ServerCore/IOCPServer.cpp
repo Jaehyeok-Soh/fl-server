@@ -11,7 +11,7 @@ IOCPServer::~IOCPServer()
 	WSACleanup();
 }
 
-bool IOCPServer::Init(const UINT32 maxIOWorkerThreadCount_)
+bool IOCPServer::Init(const uint32 maxIOWorkerThreadCount_)
 {
 	WSADATA wsaData;
 
@@ -65,7 +65,7 @@ bool IOCPServer::BindandListen(int nBindPort)
 		return false;
 	}
 
-	auto hIOCPHandle = CreateIoCompletionPort((HANDLE)mListenSocket, mIOCPHandle, (UINT32)0, 0);
+	auto hIOCPHandle = CreateIoCompletionPort((HANDLE)mListenSocket, mIOCPHandle, (uint32)0, 0);
 	if (hIOCPHandle == nullptr)
 	{
 		spdlog::error("[ERROR] failed bind listen socket IOCP : %d\n", WSAGetLastError());
@@ -76,7 +76,7 @@ bool IOCPServer::BindandListen(int nBindPort)
 	return true;
 }
 
-bool IOCPServer::StartServer(const UINT32 maxClientCount)
+bool IOCPServer::StartServer(const uint32 maxClientCount)
 {
 	CreateClient(maxClientCount);
 
@@ -127,15 +127,15 @@ void IOCPServer::DestroyThread()
 	}
 }
 
-bool IOCPServer::SendMsg(const UINT32 sessionIndex_, const UINT32 dataSize_, shared_ptr<char[]> pData)
+bool IOCPServer::SendMsg(const uint32 sessionIndex_, const uint32 dataSize_, shared_ptr<char[]> pData)
 {
 	auto pClient = GetClientInfo(sessionIndex_);
 	return pClient->SendMsg(dataSize_, pData);
 }
 
-void IOCPServer::CreateClient(const UINT32 maxClientCount)
+void IOCPServer::CreateClient(const uint32 maxClientCount)
 {
-	for (UINT32 i = 0; i < maxClientCount; i++)
+	for (uint32 i = 0; i < maxClientCount; i++)
 	{
 		auto client = make_shared<stClientInfo>();
 		client->Init(i, mIOCPHandle);
@@ -157,7 +157,7 @@ shared_ptr<stClientInfo> IOCPServer::GetEmptyClientInfo()
 	return nullptr;
 }
 
-shared_ptr<stClientInfo> IOCPServer::GetClientInfo(const UINT32 sessionIndex)
+shared_ptr<stClientInfo> IOCPServer::GetClientInfo(const uint32 sessionIndex)
 {
 	return mClientInfos[sessionIndex];
 }
@@ -167,7 +167,7 @@ bool IOCPServer::CreateWorkerThread()
 	unsigned int uiThreadId = { 0 };
 
 	// WaitingThread Queue에 대기 상태로 권장되는 쓰레드 개수 : (cpu 개수 * 2 + 1)
-	for (UINT32 i = 0; i < MaxIOWorkerThreadCount; i++)
+	for (uint32 i = 0; i < MaxIOWorkerThreadCount; i++)
 	{
 		mIOWorkerThreads.emplace_back([this]() { WorkerThread(); });
 	}

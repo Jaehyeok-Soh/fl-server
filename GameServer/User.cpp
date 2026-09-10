@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "User.h"
 
-void User::Init(const UINT32 index)
+void User::Init(const uint32 index)
 {
 	mIndex = index;
 
@@ -26,13 +26,13 @@ int User::SetLogin(shared_ptr<char> userID_)
 	return 0;
 }
 
-void User::EnterRoom(INT32 roomIndex_)
+void User::EnterRoom(int32 roomIndex_)
 {
 	mRoomIndex = roomIndex_;
 	mCurDomainState = DOMAIN_STATE::ROOM;
 }
 
-void User::SetPacketData(const UINT32 dataSize_, shared_ptr<char[]> pData_)
+void User::SetPacketData(const uint32 dataSize_, shared_ptr<char[]> pData_)
 {
 	mPacketBuffer.SetPacketData(dataSize_, pData_);
 }

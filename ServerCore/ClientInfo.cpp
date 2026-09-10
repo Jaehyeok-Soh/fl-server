@@ -11,7 +11,7 @@ stClientInfo::stClientInfo()
 	ZeroMemory(mRecvBuf.get(), MAX_SOCKBUF);
 }
 
-void stClientInfo::Init(const UINT32 index, HANDLE iocpHandle_)
+void stClientInfo::Init(const uint32 index, HANDLE iocpHandle_)
 {
 	mIndex = index;
 	mIOCPHandle = iocpHandle_;
@@ -130,7 +130,7 @@ bool stClientInfo::BindIOCompletionPort(HANDLE iocpHandle_)
 		(ULONG_PTR)(this),
 		0);
 
-	spdlog::info("BindIOCP result: {} socket: {}", (INT64)hIOCP, (int)GetSock());
+	spdlog::info("BindIOCP result: {} socket: {}", (int64)hIOCP, (int)GetSock());
 
 	if (hIOCP == INVALID_HANDLE_VALUE)
 	{
@@ -167,7 +167,7 @@ bool stClientInfo::BindRecv()
 	return true;
 }
 
-bool stClientInfo::SendMsg(const UINT32 dataSize_, shared_ptr<char[]> pMsg_)
+bool stClientInfo::SendMsg(const uint32 dataSize_, shared_ptr<char[]> pMsg_)
 {
 	lock_guard<mutex> guard(mSendLock);
 
@@ -229,7 +229,7 @@ bool stClientInfo::SendIO()
 	return true;
 }
 
-void stClientInfo::SendCompleted(const UINT32 dataSize_)
+void stClientInfo::SendCompleted(const uint32 dataSize_)
 {
 	mIsSending = false;
 	spdlog::info("[Send Completed] bytes : {}\n", dataSize_);

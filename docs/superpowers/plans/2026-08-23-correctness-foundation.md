@@ -93,10 +93,13 @@
 
 # Phase 0 — 테스트 안전망
 
-## Task 0.1: Catch2 설치
+## Task 0.1: Catch2 설치 — ✅ 완료 (2026-08-23)
 
 **목적:** 테스트 프레임워크 확보.
 **커밋:** 없음 (환경 설정)
+**결과:** Catch2 3.15.0 설치됨. 설치 결과를 보고 **Task 0.2 Step 5/11을 정정했다** —
+`Catch2Main.lib`은 `manual-link/`에 있어 자동 링크되지 않고 구성별 파일명도 다르다.
+자체 `main`을 쓰는 쪽으로 바꿨다.
 
 ---
 
@@ -114,21 +117,29 @@ vcpkg install catch2:x64-windows
 ```
 소요: 몇 분
 
-- [ ] **Step 3: 설치 확인**
+- [x] **Step 3: 설치 확인** — 완료 2026-08-23
 
 ```
 vcpkg list catch2
 ```
-Expected: `catch2:x64-windows    3.x.x`
+결과: `catch2:x64-windows    3.15.0` ✅ (3.x이므로 include 경로 그대로)
 
-⏸ **중단 조건:** 버전이 2.x면 이 계획의 include 경로가 다르다. 알려줘.
+- [x] **Step 4: 헤더 존재 확인** — 완료 2026-08-23
 
-- [ ] **Step 4: 헤더 존재 확인**
+`C:/vcpkg/installed/x64-windows/include/catch2/catch_test_macros.hpp` 존재 ✅
+
+- [x] **Step 5 (추가): 라이브러리 배치 확인** — 완료 2026-08-23
+
+계획에 없던 확인인데, 결과가 Task 0.2를 바꿔서 기록한다.
 
 ```
-dir <vcpkg루트>\installed\x64-windows\include\catch2\catch_test_macros.hpp
+installed/x64-windows/lib/Catch2.lib                     ← 자동 링크 ✅
+installed/x64-windows/lib/manual-link/Catch2Main.lib     ← 자동 링크 ❌
+installed/x64-windows/debug/lib/Catch2d.lib              ← 이름이 다름
+installed/x64-windows/debug/lib/manual-link/Catch2Maind.lib
 ```
-Expected: 파일 존재
+
+→ Task 0.2 Step 5/11 정정.
 
 ---
 
@@ -163,14 +174,19 @@ Expected: 파일 존재
 $(SolutionDir)ServerCore
 ```
 
-- [ ] **Step 5: Catch2 라이브러리 명시**
+- [ ] **Step 5: 링커 설정 — 아무것도 하지 않는다**
 
-속성 → 링커 → 입력 → 추가 종속성 **맨 앞**:
-```
-Catch2Main.lib;Catch2.lib;
-```
+**추가 종속성을 건드리지 마라.** vcpkg 통합이 `Catch2.lib`(Release) / `Catch2d.lib`(Debug)를
+구성에 맞게 자동으로 링크한다.
 
-> vcpkg 자동 링크가 Catch2 v3의 main 라이브러리를 놓치는 경우가 있다. 명시해두면 확실하다.
+**`Catch2Main.lib`을 추가 종속성에 적으면 안 된다.** 두 가지 이유다.
+
+1. `manual-link/`는 라이브러리 검색 경로에 **포함되지 않는다.** 그게 이 폴더의 존재 이유다
+   — 자동 링크에서 빼려고 분리해 둔 것이다. 이름만 적으면 못 찾는다.
+2. Debug 구성의 파일명은 `Catch2Maind.lib`다. 하드코딩하면 **Debug 빌드가 깨진다.**
+
+그래서 Catch2가 제공하는 `main` 대신 **직접 `main`을 쓴다** (Step 11).
+3줄이면 되고 프로젝트 설정을 하나도 안 건드려도 된다.
 
 - [ ] **Step 6: ServerCore 참조 추가**
 
@@ -204,9 +220,25 @@ Catch2Main.lib;Catch2.lib;
 
 `pch.cpp` 우클릭 → 속성 → C/C++ → 미리 컴파일된 헤더 → **만들기 (/Yc)**
 
-- [ ] **Step 11: 자동 생성 `Tests.cpp` 삭제**
+- [ ] **Step 11: 자동 생성 `Tests.cpp`를 테스트 러너로 교체**
 
-`main()`이 들어있어 Catch2의 `main`과 **중복 정의로 링크가 깨진다.** 프로젝트에서 제외하고 파일도 삭제.
+Visual Studio가 만든 `Tests.cpp`의 내용을 지우고 아래로 바꾼다. **파일은 남긴다.**
+
+```cpp
+#include "pch.h"
+
+#include <catch2/catch_session.hpp>
+
+int main(int argc, char* argv[])
+{
+	return Catch::Session().run(argc, argv);
+}
+```
+
+> Step 5에서 설명한 대로 `Catch2Main.lib`은 자동 링크되지 않는다. 이 3줄이 그 라이브러리가
+> 하는 일 전부다. **가장 게으른 해법이 가장 견고하기도 하다** — 구성별 파일명
+> (`Catch2d` / `Catch2Maind`)에 영향받지 않고, 나중에 명령줄 인자를 다루고 싶어지면
+> 여기서 바로 손댈 수 있다.
 
 - [ ] **Step 12: `Tests/Test_Smoke.cpp` 작성**
 
@@ -221,7 +253,32 @@ TEST_CASE("테스트 골격이 동작한다", "[smoke]")
 
 - [ ] **Step 13: 빌드 (Debug x64)**
 
-⏸ **중단 조건:** 링크 오류면 멈춰라. 흔한 원인 — `main` 중복(Step 11 누락) / `Catch2Main.lib` 못 찾음(vcpkg 통합) / pch 설정 불일치.
+⏸ **중단 조건:** 링크 오류면 멈춰라. 원인별 증상:
+
+| 증상 | 원인 |
+|---|---|
+| `main` 중복 정의 | Step 11을 안 했다 |
+| `Catch2Main.lib` 못 찾음 | 추가 종속성에 적었다 → **지워라** (Step 5) |
+| `unresolved external __std_*` 계열 | **툴셋 불일치.** 아래 참조 |
+| pch 관련 오류 | Step 9/10 설정 불일치 |
+
+**툴셋 불일치에 관하여** — 이 PC에는 MSVC가 셋 설치되어 있다 (2026-08-23 확인).
+
+| 위치 | 버전 | 용도 |
+|---|---|---|
+| VS 2022 Community | 14.29 (v142), 14.43 (**v143**) | 이 솔루션이 쓰는 것 |
+| VS 18 BuildTools | 14.50 | **vcpkg가 Catch2를 빌드할 때 쓴 것** |
+
+MSVC는 **오래된 라이브러리를 새 프로젝트에서** 쓰는 방향은 보장하지만 반대는 아니다.
+14.50으로 빌드된 `Catch2.lib`이 v143(14.43)에 없는 런타임 심볼을 참조할 수 있다.
+`spdlog`/`fmt`는 더 이전에 빌드되어 이 문제가 없다 — **Catch2만 해당된다.**
+
+**이 오류가 나면** 둘 중 하나:
+1. VS 2022 개발자 명령 프롬프트에서 Catch2 재빌드
+   (`vcpkg remove catch2:x64-windows` 후 재설치)
+2. 솔루션 툴셋을 BuildTools 쪽으로 변경 — **비추천.** 다른 프로젝트에 영향이 간다
+
+**나면 알려줘. 안 날 수도 있으니 미리 손대지 마라.**
 
 - [ ] **Step 14: 실행**
 

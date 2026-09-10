@@ -1,9 +1,9 @@
 #pragma once
-#include <windows.h>
+#include "Types.h"
 
 struct PACKET_ID
 {
-	enum Enum : UINT16
+	enum Enum : uint16
 	{
 		//SYSTEM
 		SYS_USER_CONNECT = 11,

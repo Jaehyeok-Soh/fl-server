@@ -10,8 +10,6 @@
 
 #include "ClientInfo.h"
 
-using namespace std;
-
 class IOCPServer
 {
 public:
@@ -19,20 +17,20 @@ public:
 
 	virtual ~IOCPServer();
 
-	bool Init(const UINT32 maxIOWorkerThreadCount_);
+	bool Init(const uint32 maxIOWorkerThreadCount_);
 	bool BindandListen(int nBindPort);
-	bool StartServer(const UINT32 maxClientCount);
+	bool StartServer(const uint32 maxClientCount);
 	void DestroyThread();
-	bool SendMsg(const UINT32 sessionIndex_, const UINT32 dataSize_, shared_ptr<char[]> pData);
+	bool SendMsg(const uint32 sessionIndex_, const uint32 dataSize_, shared_ptr<char[]> pData);
 
-	virtual void OnConnect(const UINT32 clientIndex_) = 0;
-	virtual void OnClose(const UINT32 clientIndex_) = 0;
-	virtual void OnReceive(const UINT32 clientIndex_, const UINT32 size_, shared_ptr<char[]> pData_) = 0;
+	virtual void OnConnect(const uint32 clientIndex_) = 0;
+	virtual void OnClose(const uint32 clientIndex_) = 0;
+	virtual void OnReceive(const uint32 clientIndex_, const uint32 size_, shared_ptr<char[]> pData_) = 0;
 
 private:
-	void CreateClient(const UINT32 maxClientCount);
+	void CreateClient(const uint32 maxClientCount);
 	shared_ptr<stClientInfo> GetEmptyClientInfo();
-	shared_ptr<stClientInfo> GetClientInfo(const UINT32 sessionIndex);
+	shared_ptr<stClientInfo> GetClientInfo(const uint32 sessionIndex);
 
 	bool CreateWorkerThread();
 	bool CreateAccepterThread();
@@ -49,7 +47,7 @@ private:
 	
 
 private:
-	UINT32 MaxIOWorkerThreadCount = { 0 };
+	uint32 MaxIOWorkerThreadCount = { 0 };
 
 	vector<shared_ptr<stClientInfo>> mClientInfos;
 

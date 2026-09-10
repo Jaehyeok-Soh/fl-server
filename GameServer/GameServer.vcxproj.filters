@@ -19,6 +19,9 @@
     <Filter Include="ObjectModel\Packet">
       <UniqueIdentifier>{79eae9f7-02a4-4aea-bdaa-fbec36f8c468}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\Enums">
+      <UniqueIdentifier>{8915ff82-1575-42aa-93e3-7fb7d3dcb2db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameServer.cpp">
@@ -82,6 +85,21 @@
     </ClInclude>
     <ClInclude Include="Packet_Login.h">
       <Filter>ObjectModel\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum_PacketId.h">
+      <Filter>Utils\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEnums.h">
+      <Filter>Utils\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="GameServerPch.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum_DomainState.h">
+      <Filter>Utils\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum_ErrorCode.h">
+      <Filter>Utils\Enums</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

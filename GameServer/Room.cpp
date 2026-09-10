@@ -5,13 +5,13 @@
 
 #include "Packet_GamesServer.h"
 
-void Room::Init(const INT32 roomNum_, const INT32 maxUserCount_)
+void Room::Init(const int32 roomNum_, const int32 maxUserCount_)
 {
 	mRoomNum = roomNum_;
 	mMaxUserCount = maxUserCount_;
 }
 
-INT16 Room::EnterUser(shared_ptr<User> user_)
+int16 Room::EnterUser(shared_ptr<User> user_)
 {
 	vector<shared_ptr<User>> existingUsers;
 
@@ -64,7 +64,7 @@ void Room::LeaveUser(shared_ptr<User> leaveUser_)
 	const auto afterSize = mUserList.size();
 
 	if (beforeSize > afterSize)
-		mCurrentUserCount -= static_cast<UINT16>(beforeSize - afterSize);
+		mCurrentUserCount -= static_cast<uint16>(beforeSize - afterSize);
 
 	{
 		for (auto& pStayUser : mUserList)
@@ -79,7 +79,7 @@ void Room::LeaveUser(shared_ptr<User> leaveUser_)
 	}
 }
 
-void Room::NotifyChat(INT32 clientIndex_, const char* userID_, const char* msg_)
+void Room::NotifyChat(int32 clientIndex_, const char* userID_, const char* msg_)
 {
 	ROOM_CHAT_NOTIFY_PACKET roomChatNtfyPkt = {};
 	roomChatNtfyPkt.PacketId = PACKET_ID::ROOM_CHAT_NOTIFY;
@@ -90,7 +90,7 @@ void Room::NotifyChat(INT32 clientIndex_, const char* userID_, const char* msg_)
 	SendToAllUser(sizeof(roomChatNtfyPkt), MakePacketBuffer(roomChatNtfyPkt), clientIndex_, false);
 }
 
-void Room::NotifyNewGuest(INT32 clientIndex_, const char* userID_)
+void Room::NotifyNewGuest(int32 clientIndex_, const char* userID_)
 {
 	ROOM_JOIN_PACKET newGuestPkt = {};
 	newGuestPkt.PacketId = PACKET_ID::ROOM_JOIN_NOTIFY;
@@ -103,12 +103,12 @@ void Room::NotifyNewGuest(INT32 clientIndex_, const char* userID_)
 	SendToAllUser(sizeof(ROOM_JOIN_PACKET), sharedNewGuestPkt, clientIndex_, true);
 }
 
-void Room::CharacterSync(INT32 clientIndex_, shared_ptr<char[]> pData)
+void Room::CharacterSync(int32 clientIndex_, shared_ptr<char[]> pData)
 {
 	SendToAllUser(sizeof(CHARACTER_SYNC_PACKET), pData, clientIndex_, false);
 }
 
-void Room::SendToAllUser(const UINT16 dataSize_, shared_ptr<char[]> data_, const INT32 passUserIndex_, bool exceptMe)
+void Room::SendToAllUser(const uint16 dataSize_, shared_ptr<char[]> data_, const int32 passUserIndex_, bool exceptMe)
 {
 	vector<shared_ptr<User>> userListSnapshot;
 
@@ -128,6 +128,6 @@ void Room::SendToAllUser(const UINT16 dataSize_, shared_ptr<char[]> data_, const
 		if (exceptMe && pUser->GetNetConnIdx() == passUserIndex_)
 			continue;
 
-		SendPacketFunc(pUser->GetNetConnIdx(), static_cast<UINT32>(dataSize_), data_);
+		SendPacketFunc(pUser->GetNetConnIdx(), static_cast<uint32>(dataSize_), data_);
 	}
 }

@@ -4,7 +4,7 @@
 #include "PacketInfo.h"
 #include "PacketHeader.h"
 
-void PacketBuffer::Init(UINT32 bufferSize_)
+void PacketBuffer::Init(uint32 bufferSize_)
 {
 	mPacketDataBuffer = make_shared<char[]>(bufferSize_);
 }
@@ -15,7 +15,7 @@ void PacketBuffer::Clear()
 	mPacketDataBufferRPos = { 0 };
 }
 
-void PacketBuffer::SetPacketData(const UINT32 dataSize_, shared_ptr<char[]> pData_)
+void PacketBuffer::SetPacketData(const uint32 dataSize_, shared_ptr<char[]> pData_)
 {
 	if (dataSize_ > PACKET_DATA_BUFFER_SIZE)
 	{
@@ -55,7 +55,7 @@ PacketInfo PacketBuffer::GetPacket()
 	const int PACKET_TYPE_LENGTH = { 2 };
 	short packetSize = { 0 };
 
-	UINT32 remainByte = mPacketDataBufferWPos - mPacketDataBufferRPos;
+	uint32 remainByte = mPacketDataBufferWPos - mPacketDataBufferRPos;
 
 	if (remainByte < PACKET_HEADER_LENGTH)
 		return PacketInfo();
@@ -76,7 +76,7 @@ PacketInfo PacketBuffer::GetPacket()
 	return packetInfo;
 }
 
-char* PacketBuffer::GetPtr(UINT32 offset)
+char* PacketBuffer::GetPtr(uint32 offset)
 {
 	return mPacketDataBuffer.get() + offset;
 }

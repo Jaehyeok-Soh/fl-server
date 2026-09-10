@@ -18,7 +18,7 @@ PacketManager::~PacketManager() = default;
 
 void PacketManager::Init(const UINT32 maxClient_)
 {
-	mRecvFunctionDictionary = unordered_map<int, PROCESS_RECV_PACKET_FUNCTION>();
+	mRecvFunctionDictionary = std::unordered_map<int, PROCESS_RECV_PACKET_FUNCTION>();
 
 	mRecvFunctionDictionary[PACKET_ID::SYS_USER_CONNECT_RESPONSE] = &PacketManager::ProcessSysUserConnectResponse;
 

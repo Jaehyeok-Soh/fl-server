@@ -9,3 +9,5 @@
 #endif
 
 #include "CorePch.h"
+
+#include "GameServerPch.h"

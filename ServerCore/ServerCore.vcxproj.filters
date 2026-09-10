@@ -54,25 +54,13 @@
     <ClInclude Include="Server_Function.h">
       <Filter>Utils\Default</Filter>
     </ClInclude>
-    <ClInclude Include="Enum_DomainState.h">
-      <Filter>Utils\Enums</Filter>
-    </ClInclude>
     <ClInclude Include="Enums.h">
-      <Filter>Utils\Enums</Filter>
-    </ClInclude>
-    <ClInclude Include="Enum_ErrorCode.h">
       <Filter>Utils\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enum_IOOperation.h">
       <Filter>Utils\Enums</Filter>
     </ClInclude>
-    <ClInclude Include="Enum_PacketId.h">
-      <Filter>Utils\Enums</Filter>
-    </ClInclude>
     <ClInclude Include="IOCPServer.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="User.h">
       <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="PacketBuffer.h">
@@ -98,6 +86,9 @@
     </ClInclude>
     <ClInclude Include="PacketInfo.h">
       <Filter>Network\ObejctModels\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum_CoreErrorCode.h">
+      <Filter>Utils\Enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

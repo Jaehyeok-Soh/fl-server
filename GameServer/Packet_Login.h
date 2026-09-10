@@ -14,6 +14,6 @@ const size_t LOGIN_REQUEST_PACKET_SIZE = sizeof(LOGIN_REQUEST_PACKET);
 
 struct LOGIN_RESPONSE_PACKET : public PACKET_HEADER
 {
-	UINT16 Result = { 0 };
+	uint16 Result = { 0 };
 };
 #pragma pack(pop)

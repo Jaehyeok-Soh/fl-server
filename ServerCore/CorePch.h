@@ -47,11 +47,10 @@
 
 using namespace std;
 
+#include "Types.h"
 #include "Server_Defines.h"
 #include "Define.h"
 #include "Enums.h"
-
-#include "Types.h"
 
 void ServerCore();
 

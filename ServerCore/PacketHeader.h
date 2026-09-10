@@ -1,11 +1,13 @@
 #pragma once
-#include <windows.h>
+#include "Types.h"
 
+#pragma pack(push, 1)
 struct PACKET_HEADER
 {
-	UINT16 PacketLength = { 0 };
-	UINT16 PacketId = { 0 };
-	UINT8 Type = { 0 };
+	uint16 PacketLength = { 0 };
+	uint16 PacketId = { 0 };
+	uint8 Type = { 0 };
 };
 
-const UINT32 PACKET_HEADER_LENGTH = sizeof(PACKET_HEADER);
+const uint32 PACKET_HEADER_LENGTH = sizeof(PACKET_HEADER);
+#pragma pack(pop)

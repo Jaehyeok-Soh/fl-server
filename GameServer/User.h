@@ -9,28 +9,28 @@ public:
 	User() = default;
 	~User() = default;
 
-	void Init(const UINT32 index);
+	void Init(const uint32 index);
 
 	void Clear();
 
 	int SetLogin(shared_ptr<char> userID_);
 
-	void EnterRoom(INT32 roomIndex_);
+	void EnterRoom(int32 roomIndex_);
 
 	void SetDomainState(DOMAIN_STATE::Enum value_) { mCurDomainState = value_; }
 
-	INT32 GetCurrentRoom() { return mRoomIndex; }
-	INT32 GetNetConnIdx() { return mIndex; }
+	int32 GetCurrentRoom() { return mRoomIndex; }
+	int32 GetNetConnIdx() { return mIndex; }
 	string GetUserId() const { return mUserID; }
 	DOMAIN_STATE::Enum GetDomainState() { return mCurDomainState; }
 
-	void SetPacketData(const UINT32 dataSize_, shared_ptr<char[]> pData_);
+	void SetPacketData(const uint32 dataSize_, shared_ptr<char[]> pData_);
 	PacketInfo GetPacket();
 
 private:
-	INT32 mIndex = { -1 };
+	int32 mIndex = { -1 };
 
-	INT32 mRoomIndex = { -1 };
+	int32 mRoomIndex = { -1 };
 
 	string mUserID = { "" };
 	bool mIsConfirm = { false };

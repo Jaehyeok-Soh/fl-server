@@ -14,9 +14,9 @@ public:
 	
 	~stClientInfo() = default;
 
-	void Init(const UINT32 index, HANDLE iocpHandle_);
+	void Init(const uint32 index, HANDLE iocpHandle_);
 	
-	UINT32 GetIndex() { return mIndex; }
+	uint32 GetIndex() { return mIndex; }
 
 	bool IsConnected() { return mIsConnect == 1; }
 
@@ -40,16 +40,16 @@ public:
 	
 	bool BindRecv();
 
-	bool SendMsg(const UINT32 dataSize_, shared_ptr<char[]> pMsg_);
+	bool SendMsg(const uint32 dataSize_, shared_ptr<char[]> pMsg_);
 
 	bool SendIO();
 
-	void SendCompleted(const UINT32 dataSize_);
+	void SendCompleted(const uint32 dataSize_);
 
 	bool SetSocketOption();
 
 private:
-	INT32 mIndex = { 0 };
+	int32 mIndex = { 0 };
 	HANDLE mIOCPHandle = { INVALID_HANDLE_VALUE };
 
 	INT64 mIsConnect = 0;
@@ -68,7 +68,7 @@ private:
 
 	mutex mSendLock;
 	atomic<bool> mIsSending = false;
-	UINT64 mSendPos = 0;
+	uint64 mSendPos = 0;
 	char mSendBuf[MAX_SOCK_SENDBUF];
 	char mSendingBuf[MAX_SOCK_SENDBUF];
 };

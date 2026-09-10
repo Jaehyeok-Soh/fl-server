@@ -12,7 +12,7 @@ struct ROOM_CHAT_REQUEST_PACKET : public PACKET_HEADER
 
 struct ROOM_CHAT_RESPONSE_PACKET : public PACKET_HEADER
 {
-	INT16 Result = { 0 };
+	int16 Result = { 0 };
 };
 
 struct ROOM_CHAT_NOTIFY_PACKET : public PACKET_HEADER

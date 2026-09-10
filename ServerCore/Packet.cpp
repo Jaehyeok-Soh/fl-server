@@ -10,7 +10,7 @@ void PacketData::Set(PacketData& value)
 	CopyMemory(pPacketData.get(), value.pPacketData.get(), value.DataSize);
 }
 
-void PacketData::Set(UINT32 sessionIndex_, UINT32 dataSize_, shared_ptr<char[]> pData)
+void PacketData::Set(uint32 sessionIndex_, uint32 dataSize_, shared_ptr<char[]> pData)
 {
 	ClientIndex = sessionIndex_;
 	DataSize = dataSize_;
